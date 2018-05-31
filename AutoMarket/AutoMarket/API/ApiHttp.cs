@@ -1,22 +1,49 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Net;
 
 namespace AutoMarket.API
 {
     using System;
     using System.Net.Http;
     using System.Threading.Tasks;
-    using System.Security;
-    using System.Threading;
     
+
+    public class Http
+    {
+
+
+        internal class RestCaller
+        {
+            public string Get(string url)
+            {
+                HttpClient client = new HttpClient();
+                var getTask = client.GetAsync(url);
+                getTask.Wait();
+                var response = getTask.Result;
+
+                if (!response.IsSuccessStatusCode)
+                    return null;
+
+                if (response.StatusCode == HttpStatusCode.NotFound)
+                    return string.Empty;
+
+                var responseContentTask = response.Content.ReadAsStringAsync();
+                responseContentTask.Wait();
+                return responseContentTask.Result.Replace("\n", Environment.NewLine);
+            }
+        }
+    }
 
 
     class ApiHttp
     {
         private readonly HttpClient http;
+
+
+
+
 
         //private String sessionID;
         //private SecureString userID;

@@ -10,11 +10,11 @@ namespace AutoMarket.API
     public class ApiGoogle
     {
 
-        private ApiGoogleHelper.Http.RestCaller restCaller; 
+        private Http.RestCaller restCaller; 
 
         public ApiGoogle()
         {
-            restCaller = new ApiGoogleHelper.Http.RestCaller();
+            restCaller = new Http.RestCaller();
             ApiGoogleHelper.Style.PopulateStyles();
         }
 
@@ -43,7 +43,7 @@ namespace AutoMarket.API
                 dateTimeTo = dateTimeTo.Add(new TimeSpan(23, 59, 59));
             }
 
-            var reader = new ApiGoogleHelper.LatestCandleReader(numberOfSeconds);
+            var reader = new LatestCandleReader(numberOfSeconds);
             return reader.Read(new StringReader(response))
                 .Where(c => (!(dateFrom == DateTime.MinValue) || c.Date >= dateFrom) &&
                             (!(dateTo == DateTime.MinValue) || c.Date <= dateTo));

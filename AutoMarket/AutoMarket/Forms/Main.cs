@@ -28,7 +28,7 @@ namespace AutoMarket
 
             API.ApiYahoo apiYahoo = new API.ApiYahoo();
             var testa = apiYahoo.GetHistoricalPrice("MSFT");
-            var test1 = apiYahoo.GetRawHistoricalPrice("MSFT");
+            //var test1 = apiYahoo.GetRawHistoricalPrice("MSFT");
 
             System.Threading.Thread.Sleep(1000);
 
