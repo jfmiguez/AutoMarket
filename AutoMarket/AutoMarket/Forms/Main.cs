@@ -26,12 +26,27 @@ namespace AutoMarket
         private void btnTestYahoo_Click(object sender, EventArgs e)
         {
 
-            API.ApiYahoo apiYahoo = new API.ApiYahoo();
-            var testa = apiYahoo.GetHistoricalPrice("MSFT");
+            //API.ApiYahoo apiYahoo = new API.ApiYahoo();
+            //var testa = apiYahoo.GetHistoricalPrice("MSFT");
             //var test1 = apiYahoo.GetRawHistoricalPrice("MSFT");
 
-            System.Threading.Thread.Sleep(1000);
+            //System.Threading.Thread.Sleep(1000);
 
+            API.ApiYahoo apiYahoo = new API.ApiYahoo();
+            var testa = apiYahoo.GetHistoricalPrice("MSFT");
+            lblCount.Text = testa.Count().ToString();
+            for (int i = 0; i < testa.Count(); i++)
+            {
+                lstTestGoogle.Items.Add(
+                    testa.ElementAt(i).Date + ", " +
+                    testa.ElementAt(i).Open + ", " +
+                    testa.ElementAt(i).High + ", " +
+                    testa.ElementAt(i).Low + ", " +
+                    testa.ElementAt(i).Close + ", " +
+                    testa.ElementAt(i).Volume
+                    );
+
+            }
 
             //Task<YahooFinanceAPI.Models.QuotePrice> quotedata = YahooFinanceAPI.Quote.GetPriceAsync("MSFT");
 

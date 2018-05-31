@@ -10,9 +10,16 @@ namespace AutoMarket.API
     public class ApiYahoo
     {
         private Http.RestCaller restCaller;
+        private const string BaseUrl = "http://finance.google.com/finance/getprices?q={0}&x={1}&i={2}&p={3}&f=d,c,h,l,o,v";
+
+        private const int FirstYear = 1990;
+
+        public ApiYahoo()
+        {
+            restCaller = new Http.RestCaller();
+        }
 
         public System.Collections.Generic.IEnumerable<Candle> GetHistoricalPrice(string Symbol)
-        //public async Task GetHistoricalPrice(string symbol)
         {
             String market = "NASDAQ";
             DateTime dateTimeFrom = DateTime.MinValue;
@@ -21,7 +28,7 @@ namespace AutoMarket.API
             int numberOfSeconds = 60;
             DateTime dateFrom = DateTime.MinValue;
             DateTime dateTo = DateTime.MaxValue;
-            var url = ApiGoogleHelper.GetUrl(market, Symbol, numberOfSeconds, dateFrom, dateTo);
+            var url = ApiYahoo.GetUrl(market, Symbol, numberOfSeconds, dateFrom, dateTo);
             var response = this.restCaller.Get(url);
 
             if (response == null)
@@ -54,14 +61,37 @@ namespace AutoMarket.API
 
         }
 
-        //public async Task GetRawHistoricalPrice(string symbol)
-        //{
-        //    while (string.IsNullOrEmpty(Token.Cookie) || string.IsNullOrEmpty(Token.Crumb))
-        //    {
-        //        await Token.RefreshAsync().ConfigureAwait(false);
-        //    }
-        //    string csvdata = await Historical.GetRawAsync(symbol, DateTime.Now.AddMonths(-1), DateTime.Now).ConfigureAwait(false);
-        //}
+        
+        public static string GetUrl(string market, string symbol, int numberOfSeconds,
+                             DateTime? from = null, DateTime? to = null)
+        {
+            var pValue = GetPeriodValueFrom(market, symbol, from, to);
+            return string.Format(BaseUrl, symbol, market, numberOfSeconds, pValue);
+        }
+
+
+
+        private static string GetPeriodValueFrom(string market, string symbol,
+            DateTime? from = null, DateTime? to = null)
+        {
+            if ((to.HasValue && !from.HasValue) ||
+                (!to.HasValue && from.HasValue) ||
+                (to.HasValue && from.HasValue && to.Value.Date < from.Value.Date))
+                throw new FormatException("Date Validation ocurr. From and To Dates should be together or none of  them. From date should be smaller than To Date");
+
+            if (!to.HasValue && !from.HasValue)
+                return (DateTime.Today.Year - FirstYear) + "Y";
+
+            // We use DateTime.Today instead of To.Value because Google only returns data from today and not
+            // between dates.
+            var numberOfDays = (DateTime.Today - from.Value).Days;
+            if (numberOfDays < 50)
+                return numberOfDays + "d";
+            if (numberOfDays < 1500)
+                return ((numberOfDays / 25) + 1) + "M";
+
+            return ((numberOfDays / 320) + 1) + "Y";
+        }
 
     }
 }
