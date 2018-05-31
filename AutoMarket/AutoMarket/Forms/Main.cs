@@ -33,11 +33,11 @@ namespace AutoMarket
             System.Threading.Thread.Sleep(1000);
 
 
-            Task<YahooFinanceAPI.Models.QuotePrice> quotedata = YahooFinanceAPI.Quote.GetPriceAsync("MSFT");
+            //Task<YahooFinanceAPI.Models.QuotePrice> quotedata = YahooFinanceAPI.Quote.GetPriceAsync("MSFT");
 
 
-            var quotedataasync = YahooFinanceAPI.Quote.GetPriceAsync("MSFT");
-            var quoterawasync = YahooFinanceAPI.Quote.GetRawAsync("MSFT");
+            //var quotedataasync = YahooFinanceAPI.Quote.GetPriceAsync("MSFT");
+            //var quoterawasync = YahooFinanceAPI.Quote.GetRawAsync("MSFT");
 
 
 

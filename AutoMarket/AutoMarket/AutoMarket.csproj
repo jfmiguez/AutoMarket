@@ -75,15 +75,6 @@
     <Compile Include="API\ApiTDAmeritrade.cs" />
     <Compile Include="API\ApiYahoo.cs" />
     <Compile Include="APITier2\ApiFinancialData.cs" />
-    <Compile Include="API\YahooDriver\Historical.cs" />
-    <Compile Include="API\YahooDriver\Models\Dividend.cs" />
-    <Compile Include="API\YahooDriver\Models\HistoryPrice.cs" />
-    <Compile Include="API\YahooDriver\Models\QuotePrice.cs" />
-    <Compile Include="API\YahooDriver\Models\YahooQuote.cs" />
-    <Compile Include="API\YahooDriver\Quote.cs" />
-    <Compile Include="API\YahooDriver\Token.cs" />
-    <Compile Include="API\YahooDriver\Utils\DateTimeConverter.cs" />
-    <Compile Include="API\YahooDriver\Utils\Json.cs" />
     <Compile Include="Forms\Main.cs">
       <SubType>Form</SubType>
     </Compile>
