@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace AutoMarket.API
 {
@@ -17,16 +18,11 @@ namespace AutoMarket.API
             ApiGoogleHelper.Style.PopulateStyles();
         }
 
-        public Candle[] GetHistoricalPrice(string Symbol)
+        public System.Collections.Generic.IEnumerable<Candle> GetHistoricalPrice(string Symbol)
         {
-            Candle[] Data = null;
-
             String market = "NASDAQ";
             DateTime dateTimeFrom = DateTime.MinValue;
             DateTime dateTimeTo = DateTime.Now;
-
-            //Nuba.Finance.Google.LatestQuotesService quoteService = new Nuba.Finance.Google.LatestQuotesService();
-            //var candle = quoteService.GetValues(market, Symbol, 60, dateTimeFrom, dateTimeTo);
 
             int numberOfSeconds = 60;
             DateTime dateFrom = DateTime.MinValue;
@@ -39,22 +35,22 @@ namespace AutoMarket.API
             if (response.Length == 0)
                 return new Candle[0];
 
-            if ((numberOfSeconds < Frequency.EveryDay) &&
-               (dateTimeTo.HasValue && dateTimeTo.Value.TimeOfDay.Equals(new TimeSpan(0, 0, 0))))
+            if ((numberOfSeconds < (24 * 60 * 60)) &&
+               ((dateTimeTo == DateTime.MinValue) && dateTimeTo.TimeOfDay.Equals(new TimeSpan(0, 0, 0))))
             {
                 // If to value is set and the time has not been set (so it's 0:00) then is set to 23:59:59 
                 // to include values for that day in the result.
-                dateTimeTo = dateTimeTo.Value.Add(new TimeSpan(23, 59, 59));
+                dateTimeTo = dateTimeTo.Add(new TimeSpan(23, 59, 59));
             }
 
-            var reader = new LatestCandleReader(numberOfSeconds);
+            var reader = new ApiGoogleHelper.LatestCandleReader(numberOfSeconds);
             return reader.Read(new StringReader(response))
-                .Where(c => (!from.HasValue || c.Date >= from.Value) &&
-                            (!to.HasValue || c.Date <= to.Value));
-
-
-            return Data;
+                .Where(c => (!(dateFrom == DateTime.MinValue) || c.Date >= dateFrom) &&
+                            (!(dateTo == DateTime.MinValue) || c.Date <= dateTo));
         }
+
+
+
         public String[] GetRawHistoricalPrice(string Symbol)
         {
             String[] Data = null;

@@ -47,6 +47,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CsvHelper, Version=7.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
+      <HintPath>..\packages\CsvHelper.7.1.0\lib\net45\CsvHelper.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -60,11 +66,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API\ApiGoogleHelper.cs" />
+    <Compile Include="API\Candle.cs" />
+    <Compile Include="API\YahooDriver\ApiFinviz.cs" />
     <Compile Include="API\ApiGoogle.cs" />
     <Compile Include="API\ApiHttp.cs" />
+    <Compile Include="API\ApiReuters.cs" />
     <Compile Include="API\ApiTDAmeritrade.cs" />
     <Compile Include="API\ApiYahoo.cs" />
     <Compile Include="APITier2\ApiFinancialData.cs" />
+    <Compile Include="API\YahooDriver\Historical.cs" />
+    <Compile Include="API\YahooDriver\Models\Dividend.cs" />
+    <Compile Include="API\YahooDriver\Models\HistoryPrice.cs" />
+    <Compile Include="API\YahooDriver\Models\QuotePrice.cs" />
+    <Compile Include="API\YahooDriver\Models\YahooQuote.cs" />
+    <Compile Include="API\YahooDriver\Quote.cs" />
+    <Compile Include="API\YahooDriver\Token.cs" />
+    <Compile Include="API\YahooDriver\Utils\DateTimeConverter.cs" />
+    <Compile Include="API\YahooDriver\Utils\Json.cs" />
     <Compile Include="Forms\Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -85,6 +104,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -110,5 +130,6 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
