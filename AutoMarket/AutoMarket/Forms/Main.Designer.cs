@@ -37,6 +37,10 @@
             this.btnTestGoogle = new System.Windows.Forms.Button();
             this.lstTestGoogle = new System.Windows.Forms.ListBox();
             this.lblCount = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.lstRealTimeQuotes = new System.Windows.Forms.ListBox();
+            this.lblTitle = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnTestYahoo
@@ -105,7 +109,7 @@
             // lstTestGoogle
             // 
             this.lstTestGoogle.FormattingEnabled = true;
-            this.lstTestGoogle.Location = new System.Drawing.Point(12, 83);
+            this.lstTestGoogle.Location = new System.Drawing.Point(12, 113);
             this.lstTestGoogle.Name = "lstTestGoogle";
             this.lstTestGoogle.Size = new System.Drawing.Size(344, 264);
             this.lstTestGoogle.TabIndex = 6;
@@ -119,11 +123,53 @@
             this.lblCount.TabIndex = 7;
             this.lblCount.Text = "0";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(12, 97);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(50, 13);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "Historical";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(12, 394);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(92, 13);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "Real-Time Quotes";
+            // 
+            // lstRealTimeQuotes
+            // 
+            this.lstRealTimeQuotes.FormattingEnabled = true;
+            this.lstRealTimeQuotes.Location = new System.Drawing.Point(12, 423);
+            this.lstRealTimeQuotes.Name = "lstRealTimeQuotes";
+            this.lstRealTimeQuotes.Size = new System.Drawing.Size(344, 95);
+            this.lstRealTimeQuotes.TabIndex = 9;
+            // 
+            // lblTitle
+            // 
+            this.lblTitle.AutoSize = true;
+            this.lblTitle.BackColor = System.Drawing.Color.DarkRed;
+            this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitle.ForeColor = System.Drawing.Color.Yellow;
+            this.lblTitle.Location = new System.Drawing.Point(188, 22);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(534, 46);
+            this.lblTitle.TabIndex = 10;
+            this.lblTitle.Text = "FORM FOR TESTING ONLY";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(746, 361);
+            this.ClientSize = new System.Drawing.Size(746, 527);
+            this.Controls.Add(this.lblTitle);
+            this.Controls.Add(this.lstRealTimeQuotes);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.lblCount);
             this.Controls.Add(this.lstTestGoogle);
             this.Controls.Add(this.btnTestGoogle);
@@ -152,6 +198,10 @@
         private System.Windows.Forms.Button btnTestGoogle;
         private System.Windows.Forms.ListBox lstTestGoogle;
         private System.Windows.Forms.Label lblCount;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ListBox lstRealTimeQuotes;
+        private System.Windows.Forms.Label lblTitle;
     }
 }
 

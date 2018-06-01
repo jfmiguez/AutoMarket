@@ -25,16 +25,10 @@ namespace AutoMarket
 
         private void btnTestYahoo_Click(object sender, EventArgs e)
         {
-
-            //API.ApiYahoo apiYahoo = new API.ApiYahoo();
-            //var testa = apiYahoo.GetHistoricalPrice("MSFT");
-            //var test1 = apiYahoo.GetRawHistoricalPrice("MSFT");
-
-            //System.Threading.Thread.Sleep(1000);
-
             API.ApiYahoo apiYahoo = new API.ApiYahoo();
-            var testa = apiYahoo.GetHistoricalPrice("MSFT");
-            lblCount.Text = testa.Count().ToString();
+
+            //get historical quotes from yahoo
+            var testa = apiYahoo.GetHistoricalPrice("MSFT");        //This gets the google quotes for now.
             for (int i = 0; i < testa.Count(); i++)
             {
                 lstTestGoogle.Items.Add(
@@ -47,6 +41,20 @@ namespace AutoMarket
                     );
 
             }
+
+            //Count the items in historical values
+            lblCount.Text = testa.Count().ToString();
+
+            //Get the quote from yahoo
+            var testb = apiYahoo.GetQuote("MSFT");
+            lstRealTimeQuotes.Items.Add("D: " + testb.Date.ToString("MM/dd/yyyy hh:mm:ss"));
+            lstRealTimeQuotes.Items.Add("O: " + testb.Open);
+            lstRealTimeQuotes.Items.Add("H: " + testb.High);
+            lstRealTimeQuotes.Items.Add("C: " + testb.Close);
+            lstRealTimeQuotes.Items.Add("L: " + testb.Low);
+            lstRealTimeQuotes.Items.Add("V: " + testb.Volume);
+
+
 
             //Task<YahooFinanceAPI.Models.QuotePrice> quotedata = YahooFinanceAPI.Quote.GetPriceAsync("MSFT");
 
