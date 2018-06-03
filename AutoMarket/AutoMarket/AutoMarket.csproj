@@ -67,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="API\ApiGoogleHelper.cs" />
+    <Compile Include="API\BusinessDays.cs" />
     <Compile Include="API\Candle.cs" />
     <Compile Include="API\ApiFinviz.cs" />
     <Compile Include="API\ApiGoogle.cs" />

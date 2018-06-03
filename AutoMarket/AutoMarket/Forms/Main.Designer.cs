@@ -41,13 +41,21 @@
             this.label4 = new System.Windows.Forms.Label();
             this.lstRealTimeQuotes = new System.Windows.Forms.ListBox();
             this.lblTitle = new System.Windows.Forms.Label();
+            this.cboInterval = new System.Windows.Forms.ComboBox();
+            this.dtDateFrom = new System.Windows.Forms.DateTimePicker();
+            this.dtDateTo = new System.Windows.Forms.DateTimePicker();
+            this.txtSymbol = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnTestYahoo
             // 
             this.btnTestYahoo.Location = new System.Drawing.Point(12, 22);
             this.btnTestYahoo.Name = "btnTestYahoo";
-            this.btnTestYahoo.Size = new System.Drawing.Size(113, 23);
+            this.btnTestYahoo.Size = new System.Drawing.Size(79, 23);
             this.btnTestYahoo.TabIndex = 0;
             this.btnTestYahoo.Text = "Test Yahoo";
             this.btnTestYahoo.UseVisualStyleBackColor = true;
@@ -98,9 +106,9 @@
             // 
             // btnTestGoogle
             // 
-            this.btnTestGoogle.Location = new System.Drawing.Point(12, 51);
+            this.btnTestGoogle.Location = new System.Drawing.Point(97, 22);
             this.btnTestGoogle.Name = "btnTestGoogle";
-            this.btnTestGoogle.Size = new System.Drawing.Size(113, 23);
+            this.btnTestGoogle.Size = new System.Drawing.Size(79, 23);
             this.btnTestGoogle.TabIndex = 5;
             this.btnTestGoogle.Text = "Test Google";
             this.btnTestGoogle.UseVisualStyleBackColor = true;
@@ -117,7 +125,7 @@
             // lblCount
             // 
             this.lblCount.AutoSize = true;
-            this.lblCount.Location = new System.Drawing.Point(131, 56);
+            this.lblCount.Location = new System.Drawing.Point(91, 97);
             this.lblCount.Name = "lblCount";
             this.lblCount.Size = new System.Drawing.Size(13, 13);
             this.lblCount.TabIndex = 7;
@@ -155,17 +163,106 @@
             this.lblTitle.BackColor = System.Drawing.Color.DarkRed;
             this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitle.ForeColor = System.Drawing.Color.Yellow;
-            this.lblTitle.Location = new System.Drawing.Point(188, 22);
+            this.lblTitle.Location = new System.Drawing.Point(340, 23);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(534, 46);
             this.lblTitle.TabIndex = 10;
             this.lblTitle.Text = "FORM FOR TESTING ONLY";
             // 
+            // cboInterval
+            // 
+            this.cboInterval.FormattingEnabled = true;
+            this.cboInterval.Items.AddRange(new object[] {
+            "1m",
+            "2m",
+            "5m",
+            "15m",
+            "30m",
+            "60m",
+            "90m",
+            "1h",
+            "1d",
+            "5d",
+            "1wk",
+            "1mo",
+            "3mo"});
+            this.cboInterval.Location = new System.Drawing.Point(67, 64);
+            this.cboInterval.Name = "cboInterval";
+            this.cboInterval.Size = new System.Drawing.Size(53, 21);
+            this.cboInterval.TabIndex = 11;
+            this.cboInterval.Text = "1d";
+            // 
+            // dtDateFrom
+            // 
+            this.dtDateFrom.Location = new System.Drawing.Point(126, 65);
+            this.dtDateFrom.Name = "dtDateFrom";
+            this.dtDateFrom.Size = new System.Drawing.Size(93, 20);
+            this.dtDateFrom.TabIndex = 12;
+            // 
+            // dtDateTo
+            // 
+            this.dtDateTo.Location = new System.Drawing.Point(225, 65);
+            this.dtDateTo.Name = "dtDateTo";
+            this.dtDateTo.Size = new System.Drawing.Size(93, 20);
+            this.dtDateTo.TabIndex = 12;
+            // 
+            // txtSymbol
+            // 
+            this.txtSymbol.Location = new System.Drawing.Point(11, 64);
+            this.txtSymbol.Name = "txtSymbol";
+            this.txtSymbol.Size = new System.Drawing.Size(50, 20);
+            this.txtSymbol.TabIndex = 13;
+            this.txtSymbol.Text = "MSFT";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(12, 48);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(41, 13);
+            this.label5.TabIndex = 14;
+            this.label5.Text = "Symbol";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(64, 48);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(42, 13);
+            this.label6.TabIndex = 14;
+            this.label6.Text = "Interval";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(123, 48);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(56, 13);
+            this.label7.TabIndex = 14;
+            this.label7.Text = "Date From";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(222, 48);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(46, 13);
+            this.label8.TabIndex = 14;
+            this.label8.Text = "Date To";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(746, 527);
+            this.ClientSize = new System.Drawing.Size(886, 527);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.txtSymbol);
+            this.Controls.Add(this.dtDateTo);
+            this.Controls.Add(this.dtDateFrom);
+            this.Controls.Add(this.cboInterval);
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.lstRealTimeQuotes);
             this.Controls.Add(this.label4);
@@ -202,6 +299,14 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ListBox lstRealTimeQuotes;
         private System.Windows.Forms.Label lblTitle;
+        private System.Windows.Forms.ComboBox cboInterval;
+        private System.Windows.Forms.DateTimePicker dtDateFrom;
+        private System.Windows.Forms.DateTimePicker dtDateTo;
+        private System.Windows.Forms.TextBox txtSymbol;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
     }
 }
 

@@ -28,7 +28,29 @@ namespace AutoMarket
             API.ApiYahoo apiYahoo = new API.ApiYahoo();
 
             //get historical quotes from yahoo
-            var testa = apiYahoo.GetHistoricalPrice("MSFT");        //This gets the google quotes for now.
+            List<API.Candle> mCandle = new List<API.Candle>();
+            DateTime dtStart = System.Convert.ToDateTime(dtDateFrom.Text);
+            DateTime dtEnd = System.Convert.ToDateTime(dtDateTo.Text);
+
+            lstRealTimeQuotes.Items.Clear();
+            lstTestGoogle.Items.Clear();
+
+            //Convert interval to seconds
+            string sFactor = cboInterval.Text.Substring(cboInterval.Text.Length - 1, 1);
+            int seconds = 0;
+            if (sFactor == "m")
+                seconds = System.Convert.ToInt32(cboInterval.Text.Replace("m", "")) * 60;
+            else if (sFactor == "h")
+                seconds = System.Convert.ToInt32(cboInterval.Text.Replace("h", "")) * 60 * 60;
+            else if (sFactor == "d")
+                seconds = System.Convert.ToInt32(cboInterval.Text.Replace("d", "")) * 60 * 60 * 24;
+            else if (sFactor == "k")
+                seconds = System.Convert.ToInt32(cboInterval.Text.Replace("wk", "")) * 60 * 60 * 24 * 5;
+            else if (sFactor == "o")
+                seconds = System.Convert.ToInt32(cboInterval.Text.Replace("mo", "")) * 60 * 60 * 24 * 5 * 4;
+
+            //pass variables to the historical price.
+            var testa = apiYahoo.GetHistoricalPrice(txtSymbol.Text, seconds, dtStart, dtEnd); 
             for (int i = 0; i < testa.Count(); i++)
             {
                 lstTestGoogle.Items.Add(
@@ -39,7 +61,6 @@ namespace AutoMarket
                     testa.ElementAt(i).Close + ", " +
                     testa.ElementAt(i).Volume
                     );
-
             }
 
             //Count the items in historical values
@@ -53,17 +74,6 @@ namespace AutoMarket
             lstRealTimeQuotes.Items.Add("C: " + testb.Close);
             lstRealTimeQuotes.Items.Add("L: " + testb.Low);
             lstRealTimeQuotes.Items.Add("V: " + testb.Volume);
-
-
-
-            //Task<YahooFinanceAPI.Models.QuotePrice> quotedata = YahooFinanceAPI.Quote.GetPriceAsync("MSFT");
-
-
-            //var quotedataasync = YahooFinanceAPI.Quote.GetPriceAsync("MSFT");
-            //var quoterawasync = YahooFinanceAPI.Quote.GetRawAsync("MSFT");
-
-
-
         }
 
         private void btnTestTDAmeritrade_Click(object sender, EventArgs e)
