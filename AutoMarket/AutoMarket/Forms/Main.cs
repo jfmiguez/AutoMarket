@@ -28,7 +28,7 @@ namespace AutoMarket
             API.ApiYahoo apiYahoo = new API.ApiYahoo();
 
             //get historical quotes from yahoo
-            List<API.Candle> mCandle = new List<API.Candle>();
+           // List<API.Candle> mCandle = new List<API.Candle>();
             DateTime dtStart = System.Convert.ToDateTime(dtDateFrom.Text);
             DateTime dtEnd = System.Convert.ToDateTime(dtDateTo.Text);
 
@@ -95,7 +95,31 @@ namespace AutoMarket
         private void btnTestGoogle_Click(object sender, EventArgs e)
         {
             API.ApiGoogle apiGoogle = new API.ApiGoogle();
-            var testa = apiGoogle.GetHistoricalPrice("MSFT");
+            lstTestGoogle.Items.Clear();
+            lstRealTimeQuotes.Items.Clear();
+
+
+            DateTime dtStart = System.Convert.ToDateTime(dtDateFrom.Text);
+            DateTime dtEnd = System.Convert.ToDateTime(dtDateTo.Text);
+            //Convert interval to seconds
+            string sFactor = cboInterval.Text.Substring(cboInterval.Text.Length - 1, 1);
+
+            int seconds = 0;
+            if (sFactor == "m")
+                seconds = System.Convert.ToInt32(cboInterval.Text.Replace("m", "")) * 60;
+            else if (sFactor == "h")
+                seconds = System.Convert.ToInt32(cboInterval.Text.Replace("h", "")) * 60 * 60;
+            else if (sFactor == "d")
+                seconds = System.Convert.ToInt32(cboInterval.Text.Replace("d", "")) * 60 * 60 * 24;
+            else if (sFactor == "k")
+                seconds = System.Convert.ToInt32(cboInterval.Text.Replace("wk", "")) * 60 * 60 * 24 * 5;
+            else if (sFactor == "o")
+                seconds = System.Convert.ToInt32(cboInterval.Text.Replace("mo", "")) * 60 * 60 * 24 * 5 * 4;
+
+
+            var testa = apiGoogle.GetHistoricalPrice(txtSymbol.Text, seconds, dtStart, dtEnd);
+
+            //var testa = apiGoogle.GetHistoricalPrice("MSFT");
             lblCount.Text = testa.Count().ToString();
             for (int i= 0; i < testa.Count(); i++)
             {
@@ -110,6 +134,14 @@ namespace AutoMarket
                 
             }
 
+            //Get the quote from Google
+            var testRTQuote = apiGoogle.GetQuote("MSFT");
+            lstRealTimeQuotes.Items.Add("D: " + testRTQuote.Date.ToString("MM/dd/yyyy hh:mm:ss"));
+            lstRealTimeQuotes.Items.Add("O: " + testRTQuote.Open);
+            lstRealTimeQuotes.Items.Add("H: " + testRTQuote.High);
+            lstRealTimeQuotes.Items.Add("C: " + testRTQuote.Close);
+            lstRealTimeQuotes.Items.Add("L: " + testRTQuote.Low);
+            lstRealTimeQuotes.Items.Add("V: " + testRTQuote.Volume);
 
         }
     }

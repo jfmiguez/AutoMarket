@@ -26,6 +26,93 @@ namespace AutoMarket.API
         public static string GetUrl(string market, string symbol, int numberOfSeconds,
                              DateTime? from = null, DateTime? to = null)
         {
+            // intervals are chosen here based on the amount of seconds (see google api)
+            string interval = "";
+            if (numberOfSeconds >= 5184000)
+                interval = "3mo";
+            else if (numberOfSeconds >= 1728000)
+                interval = "1mo";
+            else if (numberOfSeconds >= 432000)
+                interval = "1wk";
+            else if (numberOfSeconds >= 432000)
+                interval = "5d";
+            else if (numberOfSeconds >= 86400)
+                interval = "1d";
+            else if (numberOfSeconds >= 3600)
+                interval = "1h";
+            else if (numberOfSeconds >= 5400)
+                interval = "90m";
+            else if (numberOfSeconds >= 3600)
+                interval = "60m";
+            else if (numberOfSeconds >= 1800)
+                interval = "30m";
+            else if (numberOfSeconds >= 900)
+                interval = "15m";
+            else if (numberOfSeconds >= 300)
+                interval = "5m";
+            else if (numberOfSeconds >= 120)
+                interval = "2m";
+            else
+                interval = "1m";
+
+            //prevent future dates
+            if (to.HasValue && (to > DateTime.Today))
+                to = DateTime.Today;
+
+            //Table of valid intervals vs. range
+            //
+            //  1m  -   7 days
+            //  2m  -  60 days
+            //  5m  -  60 days
+            // 15m  -  60 days
+            // 30m  - 730 days
+            // 60m  - 730 days
+            // 90m  -  60 days
+            //  1h  - 730 days
+            //  1d  - unlimited days (over 200 years)
+            //  5d  - unlimited days (over 200 years)
+            //  1wk - unlimited days (over 200 years)
+            //  1mo - unlimited days (over 200 years)
+            //  3mo - unlimited days (over 200 years)
+            // Not all ranges are compatible with the intervals due to granularity
+            // and therefore need to parse a bit more than usual. For example, if the
+            // interval is 1 minute, we can't use the range of 1 year since it would be
+            // too much data for yahoo to handle but we are limited to 7 days which for
+            // most people is enough.
+            string dateRange = "";
+            TimeSpan tsdateRange = (to.Value - from.Value);
+            if ((interval == "1m") && (tsdateRange.TotalDays > 7))
+                dateRange = "7d";
+            else if (((interval == "2m") || (interval == "5m") || (interval == "15m") || (interval == "90m")) && (tsdateRange.TotalDays > 60))
+                dateRange = "60d";
+            else if (((interval == "30m") || (interval == "60m") || (interval == "1h")) && (tsdateRange.TotalDays > 730))
+                dateRange = "730d";
+            else
+                dateRange = "";
+
+            // ToDo: Find out which dates are closed.
+            //There will be a difference of 9 days because we are not yet calculating the parameters that allows us to subtract 
+            // the actual date that the market is closed. For now I can live without that, but it has to be noted that we are not able to do it yet
+            // and for this we would need some sort of either dictionary or better yet a list of dates that list the holidays or the bank holidays.
+            int totalBusinessDays = BusinessDays.BusinessDaysUntil(from.Value, to.Value);
+
+            //If the dateRange was not previously established then we need to come up with a date range.
+            if (dateRange == "")
+            {
+                if (tsdateRange.TotalDays < 1)
+                    dateRange = "1d";                           //minimum to set is 1d (intraday)
+                else if (tsdateRange.TotalDays >= (200 * 365))
+                    dateRange = "200y";                         //maximum to set is 200y (stock market wasn't there in 200y)
+                else if (totalBusinessDays >= 252)
+                    dateRange = System.Convert.ToInt32(totalBusinessDays / 252).ToString() + "y"; //convert to years
+                else if ((totalBusinessDays % 5) == 0)
+                    dateRange = System.Convert.ToInt32(totalBusinessDays / 5).ToString() + "wk"; //convert to weeks
+                else
+                    dateRange = System.Convert.ToInt32(totalBusinessDays).ToString() + "d";       //convert to days
+            }
+
+
+
             var pValue = GetPeriodValueFrom(market, symbol, from, to);
             return string.Format(BaseUrl, symbol, market, numberOfSeconds, pValue);
         }
