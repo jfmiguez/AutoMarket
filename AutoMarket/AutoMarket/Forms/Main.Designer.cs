@@ -49,6 +49,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.butTestBases = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnTestYahoo
@@ -250,11 +251,22 @@
             this.label8.TabIndex = 14;
             this.label8.Text = "Date To";
             // 
+            // butTestBases
+            // 
+            this.butTestBases.Location = new System.Drawing.Point(182, 22);
+            this.butTestBases.Name = "butTestBases";
+            this.butTestBases.Size = new System.Drawing.Size(79, 23);
+            this.butTestBases.TabIndex = 15;
+            this.butTestBases.Text = "Test Bases";
+            this.butTestBases.UseVisualStyleBackColor = true;
+            this.butTestBases.Click += new System.EventHandler(this.butTestBases_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(886, 527);
+            this.Controls.Add(this.butTestBases);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
@@ -307,6 +319,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button butTestBases;
     }
 }
 

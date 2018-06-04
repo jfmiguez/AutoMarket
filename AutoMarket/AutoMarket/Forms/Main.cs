@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AutoMarket.Bases;
 
 namespace AutoMarket
 {
@@ -142,6 +143,37 @@ namespace AutoMarket
             lstRealTimeQuotes.Items.Add("C: " + testRTQuote.Close);
             lstRealTimeQuotes.Items.Add("L: " + testRTQuote.Low);
             lstRealTimeQuotes.Items.Add("V: " + testRTQuote.Volume);
+
+        }
+
+        private void butTestBases_Click(object sender, EventArgs e)
+        {
+            //Generate a base finder and get all the DERIVED CLASSES of the base class.
+            BaseFinder baseFinder = new BaseFinder();
+            List<String> DerivedClasses = baseFinder.FindDerivedClasses();
+            
+            // Let's just get one of the classes and dynamically create an instance of the class
+            // of the derived type!
+            String strClass = DerivedClasses[0];
+            Type DerivedType = baseFinder.DerivedClass(strClass);
+            Object mClass = (object)Activator.CreateInstance(DerivedType);
+
+            //Call methods inside the class, first method will return something by value
+            // second method will take parameters and return something from the dynamically created object.
+            System.Reflection.MethodInfo method = DerivedType.GetMethod("FindBase");
+            var somereturnvalue = method.Invoke(mClass, new object[0]);
+            System.Reflection.MethodInfo method2 = DerivedType.GetMethod("Findsomething");
+            String param1 = "testing number ";
+            int param2 = 7;
+            var somereturnvalue2 = method2.Invoke(mClass, new object[] { param1, param2 });
+            Console.WriteLine("> " + somereturnvalue2);
+
+            // Generate a list of all derived classes (no, not method we are not going to over-populate)
+            for (int i = 0; i < DerivedClasses.Count(); i++)
+            {
+                lstRealTimeQuotes.Items.Add(DerivedClasses[i]);
+            }
+
 
         }
     }

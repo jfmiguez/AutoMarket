@@ -76,6 +76,12 @@
     <Compile Include="API\ApiTDAmeritrade.cs" />
     <Compile Include="API\ApiYahoo.cs" />
     <Compile Include="APITier2\ApiFinancialData.cs" />
+    <Compile Include="Bases\BaseFinder.cs" />
+    <Compile Include="Bases\CupWithHandler.cs" />
+    <Compile Include="Bases\DoubleBottomWithHandler.cs" />
+    <Compile Include="Bases\HighTightFlag.cs" />
+    <Compile Include="Bases\TightFiveWeeks.cs" />
+    <Compile Include="Bases\TightThreeWeeks.cs" />
     <Compile Include="Forms\Main.cs">
       <SubType>Form</SubType>
     </Compile>
