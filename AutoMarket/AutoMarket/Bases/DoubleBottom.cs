@@ -4,9 +4,9 @@ using AutoMarket.API;
 
 namespace AutoMarket.Bases
 {
-    class CupWithHandler : BaseFinder
+    class DoubleBottom : BaseFinder
     {
-        private String  BASE_NAME = "";
+        private String BASE_NAME = "";
         private Decimal BASE_DEPTH_MINIMUM = 0;
         private Decimal BASE_HANDLE_DEPTH_MINIMUM = 0;
         private Decimal BASE_HANDLE_RISING_COUNT = 0;
@@ -17,7 +17,7 @@ namespace AutoMarket.Bases
         /// <summary>
         /// Constructor for base parameter initialization
         /// </summary>
-        public CupWithHandler()
+        public DoubleBottom()
         {
             /// AT least the depth of the base needs to be 14%
             BASE_DEPTH_MINIMUM = 14;
@@ -26,12 +26,11 @@ namespace AutoMarket.Bases
             /// The  total count of days rising from the bottom of the handle must be 4
             BASE_HANDLE_RISING_COUNT = 4;
 
-            BASE_NAME = "Cup with Handle";
+            BASE_NAME = "Double Bottom";
 
             m_Data = new BaseData();
             m_Data.BaseName = BASE_NAME;
         }
-        
 
         /// <summary>
         /// Returns true if the base has been formed
@@ -79,7 +78,7 @@ namespace AutoMarket.Bases
             DateTime dtCurrentDate = dtStartDate;
             DateTime dtPivotPoint = dtStartDate;
             TimeSpan tsDates;
-            Double  dCurrentNumberofDays = 0;
+            Double dCurrentNumberofDays = 0;
             Boolean isBaseDuration = false;
             Boolean isBaseDeepEnough = false;
             Boolean isBaseHandleDeepEnough = false;
@@ -87,7 +86,7 @@ namespace AutoMarket.Bases
             Boolean isHandleRising = false;
 
 
-            for ( int i = 0; i < candle.Count(); i++ )
+            for (int i = 0; i < candle.Count(); i++)
             {
                 //Calculate the left side of the cup (highest point)
                 // The base starts at the left side of the cup.
@@ -118,12 +117,12 @@ namespace AutoMarket.Bases
                     if (decBasePercentDeep > BASE_DEPTH_MINIMUM)
                         isBaseDeepEnough = true;
                 }
-                
+
 
                 //The right side of the cup. Calculate this by looking at the deepest
                 // and if bigger than deepest then cup is rising, but see if the base
                 // is deep enough first.
-                if ( CupDeepest < candle.ElementAt(i).High )
+                if (CupDeepest < candle.ElementAt(i).High)
                 {
                     if (isBaseDeepEnough && !isCalculatingHandle)
                     {
@@ -157,52 +156,19 @@ namespace AutoMarket.Bases
                     }
                 }
 
-                //calculate depth of handle
-                if (isCalculatingHandle)
-                {
-                    if ( (PivotPoint == 0) || (PivotPoint == CupHandleBottom) )
-                    {
-                        PivotPoint = candle.ElementAt(i).High + System.Convert.ToDecimal(0.10);
-                        CupHandleBottom = PivotPoint;
-                        dtPivotPoint = candle.ElementAt(i).Date;
-                    }
-                    if (CupHandleBottom > candle.ElementAt(i).Low)
-                    {
-                        CupHandleBottom = candle.ElementAt(i).Low;
-                        decBaseHandlePercentDeep = ( 1 - ( CupHandleBottom / PivotPoint ) ) * 100;
-                        if (decBaseHandlePercentDeep > BASE_HANDLE_DEPTH_MINIMUM)
-                            isBaseHandleDeepEnough = true;
-                    }
-                }
-                                
+
                 //Calculate time of base
                 tsDates = dtCurrentDate - dtStartDate;
                 dCurrentNumberofDays = tsDates.TotalDays;
                 if (dCurrentNumberofDays > 49) //7 weeks
                     isBaseDuration = true;
             }
-
-            //is handle rising?
-            int iTimesRising = 0;
-            for (int i = 1; i < candle.Count(); i++)
-            {
-                if (dtPivotPoint < candle.ElementAt(i).Date)
-                {
-                    if (candle.ElementAt(i).Close > candle.ElementAt(i-1).Close)
-                    {
-                        iTimesRising++;
-                    }
-                }
-
-                //is close to pivot point
-                if (iTimesRising >= BASE_HANDLE_RISING_COUNT)
-                    isHandleRising = true;
-            }
-
             
+
+
             // Denote base formation
 
-            if ( isBaseDuration && isBaseDeepEnough )
+            if (isBaseDuration && isBaseDeepEnough)
                 m_IsFormingBase = true;
 
             if (isBaseHandleDeepEnough)
@@ -221,16 +187,6 @@ namespace AutoMarket.Bases
             return m_Data;
         }
 
-
-        public virtual String Findsomething(String parameter1, int parameter2)
-        {
-            return parameter1 + parameter2.ToString();
-        }
-
-        public String FindIt()
-        {
-            return "test2";
-        }
 
 
     }

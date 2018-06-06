@@ -78,8 +78,10 @@
     <Compile Include="APITier2\ApiFinancialData.cs" />
     <Compile Include="Bases\BaseData.cs" />
     <Compile Include="Bases\BaseFinder.cs" />
+    <Compile Include="Bases\BaseOnBase.cs" />
     <Compile Include="Bases\CupWithHandler.cs" />
-    <Compile Include="Bases\DoubleBottomWithHandler.cs" />
+    <Compile Include="Bases\DoubleBottom.cs" />
+    <Compile Include="Bases\DubbedSquareBox.cs" />
     <Compile Include="Bases\HighTightFlag.cs" />
     <Compile Include="Bases\TightFiveWeeks.cs" />
     <Compile Include="Bases\TightThreeWeeks.cs" />
