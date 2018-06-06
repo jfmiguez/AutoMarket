@@ -119,8 +119,6 @@ namespace AutoMarket
 
 
             var testa = apiGoogle.GetHistoricalPrice(txtSymbol.Text, seconds, dtStart, dtEnd);
-
-            //var testa = apiGoogle.GetHistoricalPrice("MSFT");
             lblCount.Text = testa.Count().ToString();
             for (int i= 0; i < testa.Count(); i++)
             {
@@ -148,6 +146,47 @@ namespace AutoMarket
 
         private void butTestBases_Click(object sender, EventArgs e)
         {
+            API.ApiYahoo apiYahoo = new API.ApiYahoo();
+
+            //get historical quotes from yahoo
+            // List<API.Candle> mCandle = new List<API.Candle>();
+            DateTime dtStart = System.Convert.ToDateTime(dtDateFrom.Text);
+            DateTime dtEnd = System.Convert.ToDateTime(dtDateTo.Text);
+
+            lstRealTimeQuotes.Items.Clear();
+            lstTestGoogle.Items.Clear();
+
+            //Convert interval to seconds
+            string sFactor = cboInterval.Text.Substring(cboInterval.Text.Length - 1, 1);
+            int seconds = 0;
+            if (sFactor == "m")
+                seconds = System.Convert.ToInt32(cboInterval.Text.Replace("m", "")) * 60;
+            else if (sFactor == "h")
+                seconds = System.Convert.ToInt32(cboInterval.Text.Replace("h", "")) * 60 * 60;
+            else if (sFactor == "d")
+                seconds = System.Convert.ToInt32(cboInterval.Text.Replace("d", "")) * 60 * 60 * 24;
+            else if (sFactor == "k")
+                seconds = System.Convert.ToInt32(cboInterval.Text.Replace("wk", "")) * 60 * 60 * 24 * 5;
+            else if (sFactor == "o")
+                seconds = System.Convert.ToInt32(cboInterval.Text.Replace("mo", "")) * 60 * 60 * 24 * 5 * 4;
+
+            //pass variables to the historical price.
+            IEnumerable<API.Candle> candleSticks = apiYahoo.GetHistoricalPrice(txtSymbol.Text, seconds, dtStart, dtEnd);
+
+
+
+
+
+
+
+            //NOTE: THIS WILL BE PART OF THE EXECUTION ENGINE
+
+
+
+
+
+            BaseData oData = new BaseData();
+
             //Generate a base finder and get all the DERIVED CLASSES of the base class.
             BaseFinder baseFinder = new BaseFinder();
             List<String> DerivedClasses = baseFinder.FindDerivedClasses();
@@ -160,8 +199,10 @@ namespace AutoMarket
 
             //Call methods inside the class, first method will return something by value
             // second method will take parameters and return something from the dynamically created object.
+            //System.Reflection.MethodInfo method = DerivedType.GetMethod("FindBase");
+            //var somereturnvalue = method.Invoke(mClass, new object[0]);
             System.Reflection.MethodInfo method = DerivedType.GetMethod("FindBase");
-            var somereturnvalue = method.Invoke(mClass, new object[0]);
+            oData = (BaseData)method.Invoke(mClass, new object[] { candleSticks });
             System.Reflection.MethodInfo method2 = DerivedType.GetMethod("Findsomething");
             String param1 = "testing number ";
             int param2 = 7;

@@ -199,6 +199,7 @@
             this.dtDateFrom.Name = "dtDateFrom";
             this.dtDateFrom.Size = new System.Drawing.Size(93, 20);
             this.dtDateFrom.TabIndex = 12;
+            this.dtDateFrom.Value = new System.DateTime(2018, 1, 1, 0, 0, 0, 0);
             // 
             // dtDateTo
             // 
@@ -213,7 +214,7 @@
             this.txtSymbol.Name = "txtSymbol";
             this.txtSymbol.Size = new System.Drawing.Size(50, 20);
             this.txtSymbol.TabIndex = 13;
-            this.txtSymbol.Text = "MSFT";
+            this.txtSymbol.Text = "ABCB";
             // 
             // label5
             // 
