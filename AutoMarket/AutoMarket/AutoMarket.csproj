@@ -76,6 +76,7 @@
     <Compile Include="API\ApiTDAmeritrade.cs" />
     <Compile Include="API\ApiYahoo.cs" />
     <Compile Include="APITier2\ApiFinancialData.cs" />
+    <Compile Include="Bases\BaseData.cs" />
     <Compile Include="Bases\BaseFinder.cs" />
     <Compile Include="Bases\CupWithHandler.cs" />
     <Compile Include="Bases\DoubleBottomWithHandler.cs" />
