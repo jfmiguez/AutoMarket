@@ -4,7 +4,20 @@ using AutoMarket.API;
 
 namespace AutoMarket.Bases
 {
-    class CupWithHandler : BaseFinder
+
+    /*
+     
+
+        ToDo: THE DESIGN NEEDS TO BE REDONE. NEEDS TO START FROM THE END (CLOSEST DATE)
+         AND GO TO THE BEGINNING, OTHERWISE WE WILL NEVER KNOW THE BASES AVAILABLE.
+
+        
+        
+     */
+
+
+
+    class CupWithHandler : Base
     {
         private String  BASE_NAME = "";
         private Decimal BASE_DEPTH_MINIMUM = 0;

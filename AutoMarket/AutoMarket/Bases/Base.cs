@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace AutoMarket.Bases
 {
-    public class BaseFinder
+    public class Base
     {
         /// <summary>
         /// Constructor
         /// </summary>
-        public BaseFinder() 
+        public Base() 
         {
 
         }
@@ -42,12 +42,12 @@ namespace AutoMarket.Bases
 
             var listOfBs = (from domainAssembly in AppDomain.CurrentDomain.GetAssemblies()
                             from assemblyType in domainAssembly.GetTypes()
-                            where typeof(BaseFinder).IsAssignableFrom(assemblyType)
+                            where typeof(Base).IsAssignableFrom(assemblyType)
                             select assemblyType).ToArray();
 
             for (int i = 0; i < listOfBs.Count(); i++)
             {
-                if (listOfBs[i].Name != "BaseFinder")
+                if (listOfBs[i].Name != "Base")
                     listofDerivedClasses.Add(listOfBs[i].Name);
             }
 
@@ -58,7 +58,7 @@ namespace AutoMarket.Bases
         {
             var listOfBs = (from domainAssembly in AppDomain.CurrentDomain.GetAssemblies()
                             from assemblyType in domainAssembly.GetTypes()
-                            where typeof(BaseFinder).IsAssignableFrom(assemblyType)
+                            where typeof(Base).IsAssignableFrom(assemblyType)
                             select assemblyType).ToArray();
 
             Type derivedClass = null;

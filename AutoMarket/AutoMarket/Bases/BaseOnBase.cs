@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AutoMarket.Bases
 {
-    class BaseOnBase : BaseFinder
+    class BaseOnBase : Base
     {
     }
 }

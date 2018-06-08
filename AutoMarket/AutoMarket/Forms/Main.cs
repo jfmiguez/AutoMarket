@@ -188,7 +188,7 @@ namespace AutoMarket
             BaseData oData = new BaseData();
 
             //Generate a base finder and get all the DERIVED CLASSES of the base class.
-            BaseFinder baseFinder = new BaseFinder();
+            Base baseFinder = new Base();
             List<String> DerivedClasses = baseFinder.FindDerivedClasses();
             
             // Let's just get one of the classes and dynamically create an instance of the class
@@ -217,5 +217,26 @@ namespace AutoMarket
 
 
         }
+
+        Indicators.VRREOD oVRREOD;
+        
+        private void butTestIndicators_Click(object sender, EventArgs e)
+        {
+            oVRREOD = new Indicators.VRREOD("MSFT");
+            oVRREOD.StreamStatus = true; //start streaming
+            oVRREOD.Start();        //blocking call. should not be a blocking call.. grrr...
+
+
+            while (oVRREOD.StreamStatus == true)
+            {
+                Console.WriteLine(oVRREOD.VolumeAverage50d);
+
+            }
+
+            oVRREOD.Stop();
+
+        }
+
+
     }
 }

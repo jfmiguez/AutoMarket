@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AutoMarket.Bases
 {
-    class TightFiveWeeks : BaseFinder
+    class TightFiveWeeks : Base
     {
 
         public new String FindBase()

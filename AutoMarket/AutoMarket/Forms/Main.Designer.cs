@@ -50,6 +50,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.butTestBases = new System.Windows.Forms.Button();
+            this.butTestIndicators = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnTestYahoo
@@ -262,11 +263,22 @@
             this.butTestBases.UseVisualStyleBackColor = true;
             this.butTestBases.Click += new System.EventHandler(this.butTestBases_Click);
             // 
+            // butTestIndicators
+            // 
+            this.butTestIndicators.Location = new System.Drawing.Point(267, 24);
+            this.butTestIndicators.Name = "butTestIndicators";
+            this.butTestIndicators.Size = new System.Drawing.Size(63, 20);
+            this.butTestIndicators.TabIndex = 16;
+            this.butTestIndicators.Text = "Indicators";
+            this.butTestIndicators.UseVisualStyleBackColor = true;
+            this.butTestIndicators.Click += new System.EventHandler(this.butTestIndicators_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(886, 527);
+            this.Controls.Add(this.butTestIndicators);
             this.Controls.Add(this.butTestBases);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
@@ -321,6 +333,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button butTestBases;
+        private System.Windows.Forms.Button butTestIndicators;
     }
 }
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AutoMarket.Bases
 {
-    class HighTightFlag : BaseFinder
+    class HighTightFlag : Base
     {
         public new String FindBase()
         {

@@ -4,7 +4,7 @@ using AutoMarket.API;
 
 namespace AutoMarket.Bases
 {
-    class DoubleBottom : BaseFinder
+    class DoubleBottom : Base
     {
         private String BASE_NAME = "";
         private Decimal BASE_DEPTH_MINIMUM = 0;
@@ -84,6 +84,17 @@ namespace AutoMarket.Bases
             Boolean isBaseHandleDeepEnough = false;
             Boolean isCalculatingHandle = false;
             Boolean isHandleRising = false;
+
+
+            for (int i = candle.Count(); i > 0; i--)
+            {
+                //find the right most peak going down...
+
+
+               // find the middle peak
+
+                // find the left peak.
+            }
 
 
             for (int i = 0; i < candle.Count(); i++)

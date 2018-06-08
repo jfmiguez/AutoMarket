@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AutoMarket.Bases
 {
-    class DubbedSquareBox : BaseFinder
+    class DubbedSquareBox : Base
     {
     }
 }
