@@ -4,6 +4,26 @@ using AutoMarket.API;
 
 namespace AutoMarket.Bases
 {
+
+    /*
+     Sources:
+     https://www.investors.com/how-to-invest/investors-corner/investors-corner-study-double-bottom-bases-closely/
+     https://www.investors.com/ibd-university/how-to-buy/common-patterns-2/
+     https://www.investors.com/how-to-invest/investors-corner/how-to-analyze-a-double-bottom-base/
+     https://www.investors.com/how-to-invest/investors-corner/technical-analysis-of-double-bottom-breakouts/
+     https://www.investors.com/how-to-invest/investors-corner/investors-corner-flawed-double-bottom-wide-and-loose/
+     https://education.investors.com/financial-dictionary/ibd-terms/double-bottom
+     https://www.investors.com/how-to-invest/investors-corner/double-bottom-base/
+     https://www.investopedia.com/terms/d/doublebottom.asp
+     https://www.investopedia.com/university/charts/charts4.asp
+     https://www.investors.com/how-to-invest/investors-corner/chart-basics-how-the-double-bottom-base-generates-big-profits/
+     http://www.onlinetradingconcepts.com/TechnicalAnalysis/ClassicCharting/DoubleBottom.html
+
+        https://code.msdn.microsoft.com/Technical-analysis-of-8714a87f/sourcecode?fileId=67493&pathId=1626317074
+
+         */
+
+
     class DoubleBottom : Base
     {
         private String BASE_NAME = "";
@@ -145,7 +165,9 @@ namespace AutoMarket.Bases
                         }
                     }
                 }
-
+                
+                //private Decimal BASE_HANDLE_DEPTH_MINIMUM = 0;
+                //private Decimal BASE_HANDLE_RISING_COUNT = 0;
 
                 // Handle can form on the upper part of the cup to be effective
                 // to calculate the base, at a minimum we want to rise 50% of depth.
