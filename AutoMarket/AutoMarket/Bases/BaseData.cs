@@ -18,5 +18,7 @@ namespace AutoMarket.Bases
         public Decimal PivotPoint { set; get; }
         public DateTime DateHandleStarts { set; get; }
         public Decimal DepthHandlePercent { set; get; }
+
+        public Boolean isHandleRising { set; get; }
     }
 }

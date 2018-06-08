@@ -230,7 +230,7 @@ namespace AutoMarket.Bases
             m_Data.PivotPoint = PivotPoint;
             m_Data.DateHandleStarts = dtPivotPoint;
             m_Data.DepthHandlePercent = decBaseHandlePercentDeep;
-
+            m_Data.isHandleRising = isHandleRising;
             return m_Data;
         }
 
