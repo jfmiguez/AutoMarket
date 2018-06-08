@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Net;
+using System.Net.Http;
+using System.Threading;
+using System.Web;
+using Newtonsoft.Json;
 
 //Source:
 //  https://www.tdameritrade.com/api.page
@@ -63,6 +68,60 @@ namespace AutoMarket.API
         }
 
 
+        /*
+        public bool OAuthCallback(CancellationToken token)
+        {
+            ActionResult result = null;
+            TokenModel tokenData = null;
+            using (var client = new HttpClient())
+            {
+                var requestBuilder = new UriBuilder("https://api.tdameritrade.com/v1/oauth2/token");
+                var requestQuery = HttpUtility.ParseQueryString(string.Empty);
+                requestBuilder.Query = requestQuery.ToString();
+                client.DefaultRequestHeaders.Add("Content-Type", "application/x-www-form-urlencoded");
+                var values = new Dictionary<string, string>()
+                {
+                    {"grant_type", "authorization_code"},
+                    {"access_type","offline" },
+                    {"code", Request.Query["code"].ToString()},
+                    {"client_id", "OAuth User ID" },
+                    {"redirect_uri", "Redirect URI" }
+                };
+
+                try
+                {
+                    var tokenResult = await client.PostAsync(requestBuilder.ToString(), new FormUrlEncodedContent(values));
+                    var content = await tokenResult.Content.ReadAsStringAsync();
+                    if (tokenResult.StatusCode == HttpStatusCode.OK)
+                    {
+                        tokenData = JsonConvert.DeserializeObject<TokenModel>(content);
+                        result = View("Success", tokenData);
+                    }
+                    else
+                    {
+                        result = new ContentResult { StatusCode = (int)tokenResult.StatusCode, Content = content };
+                    }
+                }
+                catch (Exception ex)
+                {
+                    result = new ContentResult { StatusCode = (int)HttpStatusCode.InternalServerError, Content = ex.ToString() };
+                }
+            }
+
+            return true;
+        }
+        */
+
 
     }
 }
+
+public class TokenModel
+{
+    public string access_token { get; set; }
+    public string refresh_token { get; set; }
+    public int expires_in { get; set; }
+    public int refresh_token_expires_in { get; set; }
+    public string token_type { get; set; }
+}
+
