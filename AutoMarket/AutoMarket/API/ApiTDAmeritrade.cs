@@ -38,7 +38,7 @@ namespace AutoMarket.API
 
 
         //Login to the TDAmeritrade system
-        public Boolean login(String userName, String password)
+        public Boolean login2(String userName, String password)
         {
             Boolean hasLoggedinSuccessfully = false;
             
@@ -67,8 +67,35 @@ namespace AutoMarket.API
             return hasLoggedinSuccessfully;
         }
 
+        public bool login(String userName, String password)
+        {
+            Http.RestCaller restCaller;
+            restCaller = new Http.RestCaller();
 
-        /*
+            var requestBuilder = new UriBuilder("https://api.tdameritrade.com/v1/oauth2/token");
+
+            var values = new Dictionary<string, string>()
+                {
+                    {"grant_type", "authorization_code"},
+                    {"access_type","offline" },
+                    //{"code", Request.Query["code"].ToString()},
+                    //{"code", "0".ToString()},
+                    {"code", ""},
+                    {"client_id", "" },
+                    {"redirect_uri", "http://127.0.0.1/" }
+                };
+
+            //HttpContent content = new FormUrlEncodedContent(values);
+            FormUrlEncodedContent content = new FormUrlEncodedContent(values);
+            //content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/x-www-form-urlencoded");
+
+            var response = restCaller.Post(requestBuilder.ToString(), content);
+
+            return true;
+        }
+
+        /* 
+        
         public bool OAuthCallback(CancellationToken token)
         {
             ActionResult result = null;
@@ -110,8 +137,8 @@ namespace AutoMarket.API
 
             return true;
         }
+        
         */
-
 
     }
 }

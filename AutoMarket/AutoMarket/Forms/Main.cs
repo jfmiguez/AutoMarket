@@ -83,13 +83,18 @@ namespace AutoMarket
             if ((txtUsername.Text != "") && (txtPassword.Text != ""))
             {
                 //(String key = "DEMO", String name = "TD Ameritrade Client Library for .NET", String version = "2.0.0")
+                API.ApiTDAmeritrade apiTDAmeritrade2 = new API.ApiTDAmeritrade("DEMO", "TD Ameritrade Client Library for .NET", "2.0.0");
+                bool islogin2 = apiTDAmeritrade2.login2(txtUsername.Text, txtPassword.Text);
+
+                if (!islogin2)
+                {
+                    islogin2 = false;
+                }
+            }
+            else
+            {
                 API.ApiTDAmeritrade apiTDAmeritrade = new API.ApiTDAmeritrade("DEMO", "TD Ameritrade Client Library for .NET", "2.0.0");
                 bool islogin = apiTDAmeritrade.login(txtUsername.Text, txtPassword.Text);
-
-                if (!islogin)
-                {
-                    islogin = false;
-                }
             }
         }
 
