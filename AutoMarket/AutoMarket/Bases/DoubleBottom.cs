@@ -220,7 +220,25 @@ namespace AutoMarket.Bases
             return m_Data;
         }
 
+        public virtual String Findsomething(String parameter1, int parameter2)
+        {
+            return parameter1 + parameter2.ToString();
+        }
+
+        public String FindIt()
+        {
+            return "Double Bottom";
+        }
+
 
 
     }
 }
+
+
+
+
+
+
+
+

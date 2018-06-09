@@ -33,6 +33,68 @@ namespace AutoMarket.API
                 responseContentTask.Wait();
                 return responseContentTask.Result.Replace("\n", Environment.NewLine);
             }
+
+            public string Post(string url, HttpContent content)
+            {
+                HttpClient client = new HttpClient();
+
+                //client.BaseAddress = new Uri(url);
+
+                //content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/x-www-form-urlencoded");
+                //client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/x-www-form-urlencoded"));
+
+                //client.DefaultRequestHeaders.Add("Accept", "application/x-www-form-urlencoded");
+                //client.DefaultRequestHeaders.Add("Content-Type", "application/x-www-form-urlencoded");
+                //client.DefaultRequestHeaders.Add("Content-Type", "application/x-www-form-urlencoded");
+                //content.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
+
+                var getTask = client.PostAsync(url, content);
+
+                getTask.Wait();
+                var response = getTask.Result;
+
+                if (!response.IsSuccessStatusCode)
+                    return null;
+
+                if (response.StatusCode == HttpStatusCode.NotFound)
+                    return string.Empty;
+
+                var responseContentTask = response.Content.ReadAsStringAsync();
+
+                responseContentTask.Wait();
+
+                return responseContentTask.Result.Replace("\n", Environment.NewLine);
+
+            }
+
+
+            public string Post(Uri url, HttpContent content)
+            {
+                HttpClient client = new HttpClient();
+
+                client.DefaultRequestHeaders.Add("Content-Type", "application/x-www-form-urlencoded");
+
+                var getTask = client.PostAsync(url, content);
+
+                getTask.Wait();
+                var response = getTask.Result;
+
+                if (!response.IsSuccessStatusCode)
+                    return null;
+
+                if (response.StatusCode == HttpStatusCode.NotFound)
+                    return string.Empty;
+
+                var responseContentTask = response.Content.ReadAsStringAsync();
+
+                responseContentTask.Wait();
+
+                return responseContentTask.Result.Replace("\n", Environment.NewLine);
+
+            }
+
+
+
         }
     }
 
