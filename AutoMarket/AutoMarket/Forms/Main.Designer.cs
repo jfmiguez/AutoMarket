@@ -51,6 +51,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.butTestBases = new System.Windows.Forms.Button();
             this.butTestIndicators = new System.Windows.Forms.Button();
+            this.butFinViz = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnTestYahoo
@@ -273,11 +274,22 @@
             this.butTestIndicators.UseVisualStyleBackColor = true;
             this.butTestIndicators.Click += new System.EventHandler(this.butTestIndicators_Click);
             // 
+            // butFinViz
+            // 
+            this.butFinViz.Location = new System.Drawing.Point(362, 156);
+            this.butFinViz.Name = "butFinViz";
+            this.butFinViz.Size = new System.Drawing.Size(113, 23);
+            this.butFinViz.TabIndex = 17;
+            this.butFinViz.Text = "Test Finviz";
+            this.butFinViz.UseVisualStyleBackColor = true;
+            this.butFinViz.Click += new System.EventHandler(this.butFinViz_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(886, 527);
+            this.Controls.Add(this.butFinViz);
             this.Controls.Add(this.butTestIndicators);
             this.Controls.Add(this.butTestBases);
             this.Controls.Add(this.label8);
@@ -334,6 +346,7 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button butTestBases;
         private System.Windows.Forms.Button butTestIndicators;
+        private System.Windows.Forms.Button butFinViz;
     }
 }
 

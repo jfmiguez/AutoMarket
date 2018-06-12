@@ -242,6 +242,37 @@ namespace AutoMarket
 
         }
 
+        private void butFinViz_Click(object sender, EventArgs e)
+        {
+            //test financial visualization  http://www.finviz.com
 
+            //API.Http.RestCaller http = new API.Http.RestCaller();
+
+            //String finvizdata = http.Get("http://www.finviz.com");
+
+            //#region Sector Map Performance (the cool red-green map by FinViz)
+
+            ////Strip easily the Sector Map Performance
+            //int iStart = finvizdata.LastIndexOf("var FinvizSecMapPerf") + 24;
+            //int iEnd = finvizdata.IndexOf("}", iStart);
+            //String SectorMapPerformance = finvizdata.Substring(iStart, iEnd - iStart).Replace("\"", "");
+            //String[] arrIndividualStockPerformance = SectorMapPerformance.Split(',');
+            //Dictionary<String, Double> dicStockPerformance = new Dictionary<String, Double>();
+            //for (int i = 0; i < arrIndividualStockPerformance.Count(); i++)
+            //{
+            //    String[] KeyValuePair = arrIndividualStockPerformance[i].Split(':');
+            //    dicStockPerformance.Add(KeyValuePair[0], System.Convert.ToDouble(KeyValuePair[1]));
+            //}
+            //Console.WriteLine(finvizdata);
+
+            //#endregion
+
+            API.ApiFinviz apiFinviz = new API.ApiFinviz();
+            apiFinviz.CaptureMainScreenData();
+
+
+
+
+        }
     }
 }
