@@ -39,7 +39,7 @@ namespace AutoMarket.API
                 HttpClient client = new HttpClient();
 
                 //client.BaseAddress = new Uri(url);
-
+                
                 //content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/x-www-form-urlencoded");
                 //client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/x-www-form-urlencoded"));
 
@@ -47,9 +47,9 @@ namespace AutoMarket.API
                 //client.DefaultRequestHeaders.Add("Content-Type", "application/x-www-form-urlencoded");
                 //client.DefaultRequestHeaders.Add("Content-Type", "application/x-www-form-urlencoded");
                 //content.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
-
+                
                 var getTask = client.PostAsync(url, content);
-
+                //var getTask = client.GetAsync(url, content);
                 getTask.Wait();
                 var response = getTask.Result;
 
